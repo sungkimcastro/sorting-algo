@@ -2,6 +2,7 @@ import Chart from "chart.js";
 const ctx = document.querySelector("#myChart");
 import selectionSort from "./selection";
 import insetionSort from "./insertion";
+import bubbleSort from "./bubble";
 
 const chart = new Chart(ctx, {
   type: "bar",
@@ -83,7 +84,13 @@ document.querySelector("#selection").addEventListener("click", () => {
 document.querySelector("#insertion").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
-  insetionSort(arr);
   const insertion = insetionSort(arr);
   updateData(chart, insertion, "Insertion Sort");
+});
+
+document.querySelector("#bubble").addEventListener("click", () => {
+  let arr = [];
+  chart.data.datasets.map(({ data }) => arr.push(...data));
+  const bubble = bubbleSort(arr);
+  updateData(chart, bubble, "Bubble Sort");
 });
