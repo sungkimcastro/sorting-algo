@@ -5,8 +5,9 @@ export default function selectionSort(arr) {
         let prevVal = arr[i];
         arr[i] = arr[j];
         arr[j] = prevVal;
+        return arr;
       }
     }
   }
-  return arr;
+  return false;
 }

@@ -46,16 +46,22 @@ const chart = new Chart(ctx, {
   },
 });
 
-function addData(chart, data) {
+function addData(chart, data, completed) {
+  if (completed) chart.options.animation.duration = 0;
+  else chart.options.animation.duration = 1000;
+
   chart.data.datasets.map((dataset) => {
+    chart.data.labels = dataset.data;
     dataset.data.push(data);
-    chart.data.labels.push(data);
   });
 
   chart.update();
 }
 
-function updateData(chart, arr, label = "") {
+function updateData(chart, arr, label = "", completed = false) {
+  if (completed) chart.options.animation.duration = 0;
+  else chart.options.animation.duration = 1000;
+
   chart.data.datasets.map((dataset) => {
     dataset.label = label;
     dataset.data = arr;
@@ -92,15 +98,36 @@ document.querySelector("#random").addEventListener("click", () => {
 document.querySelector("#bubble").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
-  const bubble = bubbleSort(arr);
-  updateData(chart, bubble, "Bubble Sort");
+
+  const interval = setInterval(operation, 100);
+
+  function operation() {
+    const bubble = bubbleSort(arr);
+
+    updateData(chart, bubble, "Bubble Sort");
+
+    if (!bubble) {
+      clearInterval(interval);
+      updateData(chart, arr, "Selection Sort", true);
+    }
+  }
 });
 
 document.querySelector("#selection").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
-  const selection = selectionSort(arr);
-  updateData(chart, selection, "Selection Sort");
+
+  const interval = setInterval(operation, 100);
+
+  function operation() {
+    const selection = selectionSort(arr);
+    updateData(chart, selection, "Selection Sort");
+
+    if (!selection) {
+      clearInterval(interval);
+      updateData(chart, arr, "Selection Sort", true);
+    }
+  }
 });
 
 document.querySelector("#insertion").addEventListener("click", () => {

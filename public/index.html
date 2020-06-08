@@ -30,21 +30,23 @@
   </head>
 
   <body>
-    <div class="d-block">
+    <div class="text-center">
       <button class="btn btn-light" id="add">Add 1</button>
       <button class="btn btn-light" id="add50">Add 50</button>
       <button class="btn btn-light" id="random">Randomize</button>
+
+      <div class="d-block my-3">
+        <button class="btn btn-light" id="bubble">Bubble Sort</button>
+        <button class="btn btn-light" id="selection">Selection Sort</button>
+        <button class="btn btn-light" id="insertion">Insertion Sort</button>
+        <button class="btn btn-light" id="merge">Merge Sort</button>
+        <button class="btn btn-light" id="quick">Quick Sort</button>
+      </div>
     </div>
+
     <canvas id="myChart" class="chart-container" width="100" height="400">
       Your browser does not support the canvas element.
     </canvas>
-    <div id="btn_group">
-      <button id="bubble">Bubble Sort</button>
-      <button id="selection">Selection Sort</button>
-      <button id="insertion">Insertion Sort</button>
-      <button id="merge">Merge Sort</button>
-      <button id="quick">Quick Sort</button>
-    </div>
 
     <script src="./scripts/bundle.js"></script>
   </body>
