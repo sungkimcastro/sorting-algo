@@ -4,6 +4,7 @@ import selectionSort from "./selection";
 import insetionSort from "./insertion";
 import bubbleSort from "./bubble";
 import mergeSort from "./merge";
+import quickSort from "./quick";
 
 const chart = new Chart(ctx, {
   type: "bar",
@@ -88,6 +89,13 @@ document.querySelector("#random").addEventListener("click", () => {
   updateData(chart, arr);
 });
 
+document.querySelector("#bubble").addEventListener("click", () => {
+  let arr = [];
+  chart.data.datasets.map(({ data }) => arr.push(...data));
+  const bubble = bubbleSort(arr);
+  updateData(chart, bubble, "Bubble Sort");
+});
+
 document.querySelector("#selection").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
@@ -102,16 +110,16 @@ document.querySelector("#insertion").addEventListener("click", () => {
   updateData(chart, insertion, "Insertion Sort");
 });
 
-document.querySelector("#bubble").addEventListener("click", () => {
-  let arr = [];
-  chart.data.datasets.map(({ data }) => arr.push(...data));
-  const bubble = bubbleSort(arr);
-  updateData(chart, bubble, "Bubble Sort");
-});
-
 document.querySelector("#merge").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
   const merge = mergeSort(arr);
   updateData(chart, merge, "Merge Sort");
+});
+
+document.querySelector("#quick").addEventListener("click", () => {
+  let arr = [];
+  chart.data.datasets.map(({ data }) => arr.push(...data));
+  const quick = quickSort(arr);
+  updateData(chart, quick, "Quick Sort");
 });
