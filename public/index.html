@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <title>Algo</title>
+    <style>
+      body {
+        background: transparent;
+        padding: 16px;
+      }
+
+      canvas {
+        border: 2px dotted red;
+      }
+
+      .chart-container {
+        position: relative;
+        margin: auto;
+        width: 80vw !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="d-block">
+      <button class="btn btn-light" id="add">Add</button>
+      <button class="btn btn-light" id="random">Random</button>
+    </div>
+    <canvas id="myChart" class="chart-container" width="100" height="400">
+      Your browser does not support the canvas element.
+    </canvas>
+    <button id="selection">Selection Sort</button>
+    <script src="./scripts/bundle.js"></script>
+  </body>
+</html>
