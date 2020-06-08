@@ -3,6 +3,7 @@ const ctx = document.querySelector("#myChart");
 import selectionSort from "./selection";
 import insetionSort from "./insertion";
 import bubbleSort from "./bubble";
+import mergeSort from "./merge";
 
 const chart = new Chart(ctx, {
   type: "bar",
@@ -53,7 +54,7 @@ function addData(chart, data) {
   chart.update();
 }
 
-function updateData(chart, arr, label) {
+function updateData(chart, arr, label = "") {
   chart.data.datasets.map((dataset) => {
     dataset.label = label;
     dataset.data = arr;
@@ -67,11 +68,24 @@ document.querySelector("#add").addEventListener("click", () => {
   addData(chart, data);
 });
 
-document.querySelector("#random").addEventListener("click", () => {
+document.querySelector("#add50").addEventListener("click", () => {
   for (let i = 0; i <= 50; i++) {
     const data = Math.floor(Math.random() * 1000) + 1;
     addData(chart, data);
   }
+});
+
+document.querySelector("#random").addEventListener("click", () => {
+  let arr = [];
+  chart.data.datasets.map(({ data }) => arr.push(...data));
+
+  for (let i = arr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+  updateData(chart, arr);
 });
 
 document.querySelector("#selection").addEventListener("click", () => {
@@ -93,4 +107,11 @@ document.querySelector("#bubble").addEventListener("click", () => {
   chart.data.datasets.map(({ data }) => arr.push(...data));
   const bubble = bubbleSort(arr);
   updateData(chart, bubble, "Bubble Sort");
+});
+
+document.querySelector("#merge").addEventListener("click", () => {
+  let arr = [];
+  chart.data.datasets.map(({ data }) => arr.push(...data));
+  const merge = mergeSort(arr);
+  updateData(chart, merge, "Merge Sort");
 });
