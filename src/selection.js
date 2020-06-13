@@ -1,4 +1,5 @@
-import chart, { visua, sleep } from "./index";
+import chart, { visua } from "./chart";
+import { sleep } from "./index";
 
 export default async function selectionSort(arr) {
   for (let i = 0; i < arr.length; i++) {
@@ -8,7 +9,7 @@ export default async function selectionSort(arr) {
         arr[i] = arr[j];
         arr[j] = prevVal;
         await sleep(100);
-        await visua(chart, arr);
+        await visua(chart, arr, "Selection sort");
       }
     }
   }

@@ -1,4 +1,5 @@
-import chart, { visua, sleep } from "./index";
+import chart, { visua } from "./chart";
+import { sleep } from "./index";
 
 async function pivot(arr, start = 0, end = arr.length + 1) {
   let fistNum = arr[start];
@@ -9,7 +10,7 @@ async function pivot(arr, start = 0, end = arr.length + 1) {
     arr[i] = arr[j];
     arr[j] = tempNum;
     await sleep(100);
-    await visua(chart, arr);
+    await visua(chart, arr, "Quick sort");
   }
 
   for (let i = start + 1; i < arr.length; i++) {

@@ -1,4 +1,7 @@
-function sort(arr1, arr2) {
+import chart, { visua } from "./chart";
+import { sleep } from "./index";
+
+export async function sort(arr1, arr2, arrcl) {
   let collector = [];
   let i = 0;
   let j = 0;
@@ -22,15 +25,19 @@ function sort(arr1, arr2) {
     j++;
   }
 
+  await sleep(1000);
+
+  await visua(chart, collector, "Merge sort", arrcl);
+
   return collector;
 }
 
-export default function mergeSort(arr) {
+export default async function mergeSort(arr, clone) {
   if (arr.length <= 1) return arr;
 
   const middle = Math.floor(arr.length / 2);
-  let left = mergeSort(arr.slice(0, middle));
-  let right = mergeSort(arr.slice(middle));
+  let left = await mergeSort(arr.slice(0, middle), clone);
+  let right = await mergeSort(arr.slice(middle), clone);
 
-  return sort(left, right);
+  return await sort(left, right, clone);
 }
