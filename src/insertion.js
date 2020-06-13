@@ -1,5 +1,5 @@
 import chart, { visua } from "./chart";
-import { sleep } from "./index";
+import { sleep } from "./helpers";
 
 export default async function insetionSort(arr) {
   for (let i = 1; i < arr.length; i++) {
@@ -11,8 +11,8 @@ export default async function insetionSort(arr) {
 
       arr[j + 1] = num;
 
-      await sleep(100);
       await visua(chart, arr, "Insertion sort");
+      await sleep(chart.options.speed);
     }
   }
 

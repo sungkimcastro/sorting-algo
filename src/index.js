@@ -6,16 +6,7 @@ import mergeSort from "./merge";
 import quickSort from "./quick";
 import radixSort from "./radix";
 import randomize from "./randomize";
-
-export async function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-export function retrieveData(chart) {
-  let collector = [];
-  chart.data.datasets.map(({ data }) => collector.push(...data));
-  return collector;
-}
+import { speedListener, retrieveData } from "./helpers";
 
 document.querySelector("#add").addEventListener("click", () => {
   const data = Math.floor(Math.random() * 1000) + 1;
@@ -35,6 +26,13 @@ document.querySelector("#add-50").addEventListener("click", () => {
     addData(chart, data);
   }
 });
+
+document
+  .querySelector("#speed")
+  .addEventListener("onchange", speedListener, false);
+document
+  .querySelector("#speed")
+  .addEventListener("input", speedListener, false);
 
 document.querySelector("#random").addEventListener("click", () => {
   const data = retrieveData(chart);

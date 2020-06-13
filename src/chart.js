@@ -19,6 +19,8 @@ const chart = new Chart(ctx, {
   },
 
   options: {
+    speed: 1000,
+    stop: false,
     maintainAspectRatio: false,
     scales: {
       yAxes: [
@@ -62,7 +64,7 @@ export function updateData(chart, arr, label = "") {
 export function visua(chart, arr, label = "", arrcl = []) {
   if (arrcl.length) {
     if (arr.length < arrcl.length) {
-      console.log(...arr, arrcl);
+      console.log(arr, arrcl);
     } else {
       chart.data.datasets.map((dataset) => {
         dataset.label = label;

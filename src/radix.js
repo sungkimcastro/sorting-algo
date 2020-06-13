@@ -1,5 +1,5 @@
 import chart, { visua } from "./chart";
-import { sleep } from "./index";
+import { sleep } from "./helpers";
 
 function getDigit(num, i) {
   return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
@@ -31,8 +31,8 @@ export default async function radixSort(nums) {
 
     nums = [].concat(...digitBuckets);
 
-    await sleep(1000);
     await visua(chart, nums, "Radix sort");
+    await sleep(chart.options.speed);
   }
   return nums;
 }

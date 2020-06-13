@@ -1,5 +1,5 @@
 import chart, { visua } from "./chart";
-import { sleep } from "./index";
+import { sleep } from "./helpers";
 
 export async function sort(arr1, arr2, arrcl) {
   let collector = [];
@@ -25,7 +25,7 @@ export async function sort(arr1, arr2, arrcl) {
     j++;
   }
 
-  await sleep(1000);
+  await sleep(chart.options.speed);
 
   await visua(chart, collector, "Merge sort", arrcl);
 
