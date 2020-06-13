@@ -1,11 +1,12 @@
 import Chart from "chart.js";
-const ctx = document.querySelector("#myChart");
 import selectionSort from "./selection";
 import insetionSort from "./insertion";
 import bubbleSort from "./bubble";
 import mergeSort from "./merge";
 import quickSort from "./quick";
+import randomize from "./randomize";
 
+const ctx = document.querySelector("#myChart");
 const chart = new Chart(ctx, {
   type: "bar",
   data: {
@@ -46,10 +47,7 @@ const chart = new Chart(ctx, {
   },
 });
 
-function addData(chart, data, completed) {
-  if (completed) chart.options.animation.duration = 0;
-  else chart.options.animation.duration = 1000;
-
+function addData(chart, data) {
   chart.data.datasets.map((dataset) => {
     chart.data.labels = dataset.data;
     dataset.data.push(data);
@@ -58,16 +56,35 @@ function addData(chart, data, completed) {
   chart.update();
 }
 
-function updateData(chart, arr, label = "", completed = false) {
-  if (completed) chart.options.animation.duration = 0;
-  else chart.options.animation.duration = 1000;
-
+function updateData(chart, arr, label = "") {
   chart.data.datasets.map((dataset) => {
     dataset.label = label;
     dataset.data = arr;
   });
   chart.data.labels = arr;
   chart.update();
+}
+
+export function visua(chart, arr, label = "") {
+  chart.data.datasets.map((dataset) => {
+    dataset.label = label;
+    dataset.data = arr;
+  });
+  chart.data.labels = arr;
+  chart.update();
+}
+
+export function multipleVisua(chart, arr) {
+  let collector = [];
+  chart.data.datasets.map(({ data }) => collector.push(...data));
+
+  if (arr.length <= 1) return;
+
+  console.log(arr, collector);
+}
+
+export async function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 document.querySelector("#add").addEventListener("click", () => {
@@ -85,68 +102,39 @@ document.querySelector("#add50").addEventListener("click", () => {
 document.querySelector("#random").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
-
-  for (let i = arr.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    let temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-  }
-  updateData(chart, arr);
+  const random = randomize(arr);
+  updateData(chart, random);
 });
 
 document.querySelector("#bubble").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
-
-  const interval = setInterval(operation, 100);
-
-  function operation() {
-    const bubble = bubbleSort(arr);
-
-    updateData(chart, bubble, "Bubble Sort");
-
-    if (!bubble) {
-      clearInterval(interval);
-      updateData(chart, arr, "Selection Sort", true);
-    }
-  }
+  bubbleSort(arr);
 });
 
 document.querySelector("#selection").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
-
-  const interval = setInterval(operation, 100);
-
-  function operation() {
-    const selection = selectionSort(arr);
-    updateData(chart, selection, "Selection Sort");
-
-    if (!selection) {
-      clearInterval(interval);
-      updateData(chart, arr, "Selection Sort", true);
-    }
-  }
+  selectionSort(arr);
 });
 
 document.querySelector("#insertion").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
-  const insertion = insetionSort(arr);
-  updateData(chart, insertion, "Insertion Sort");
+  insetionSort(arr);
 });
 
 document.querySelector("#merge").addEventListener("click", () => {
   let arr = [];
   chart.data.datasets.map(({ data }) => arr.push(...data));
-  const merge = mergeSort(arr);
-  updateData(chart, merge, "Merge Sort");
+  mergeSort(arr);
 });
 
 document.querySelector("#quick").addEventListener("click", () => {
   let arr = [];
+
   chart.data.datasets.map(({ data }) => arr.push(...data));
-  const quick = quickSort(arr);
-  updateData(chart, quick, "Quick Sort");
+  quickSort(arr);
 });
+
+export default chart;
