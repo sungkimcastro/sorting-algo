@@ -1,4 +1,4 @@
-import chart, { addData, updateData } from "./chart";
+import chart, { addData, updateData, setStyles } from "./chart";
 import selectionSort from "./selection";
 import insetionSort from "./insertion";
 import bubbleSort from "./bubble";
@@ -7,6 +7,25 @@ import quickSort from "./quick";
 import radixSort from "./radix";
 import randomize from "./randomize";
 import { speedListener, retrieveData } from "./helpers";
+
+document.querySelector("#go-retro").addEventListener("click", () => {
+  const bodyClass = document.querySelectorAll(".body")[0];
+  const setClass = bodyClass.classList.toggle("go__retro");
+  let bgc = "rgba(255,99,132,0.2)",
+    bc = "rgba(255,99,132,1)",
+    hbc = "rgba(255,99,132,1)",
+    fc = "rgba(255,99,132,1)";
+
+  if (setClass) {
+    bgc = "rgba(255,99,132,0.4)";
+    bc = "#ff00ff";
+    hbc = "#ff00ff";
+    fc = "#00ff9f";
+    setStyles(chart, bgc, bc, hbc, fc);
+  } else {
+    setStyles(chart, bgc, bc, hbc, fc);
+  }
+});
 
 document.querySelector("#add").addEventListener("click", () => {
   const data = Math.floor(Math.random() * 1000) + 1;

@@ -22,10 +22,17 @@ const chart = new Chart(ctx, {
     speed: 1000,
     stop: false,
     maintainAspectRatio: false,
+    responsive: true,
+    legend: {
+      labels: {
+        fontColor: "rgba(255,99,132,1)",
+        fontSize: 15,
+      },
+    },
     scales: {
       yAxes: [
         {
-          stacked: true,
+          stacked: false,
           gridLines: {
             display: true,
             color: "rgba(255,99,132,0.2)",
@@ -81,6 +88,16 @@ export function visua(chart, arr, label = "", arrcl = []) {
     chart.data.labels = arr;
     chart.update();
   }
+}
+
+export function setStyles(chart, bgc, bc, hbc, fc) {
+  chart.data.datasets.map((data) => {
+    data.backgroundColor = bgc;
+    data.borderColor = bc;
+    data.hoverBorderColor = hbc;
+  });
+  chart.options.legend.labels.fontColor = fc;
+  chart.update();
 }
 
 export default chart;
