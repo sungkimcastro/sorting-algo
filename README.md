@@ -3,7 +3,7 @@
 ### Clone the repo
 
 ```bash
-git clone https://github.com/sungkimcastro/burgerbuilder.git
+git clone https://github.com/sungkimcastro/sorting-algo.git
 ```
 
 ### Install dependencies
